@@ -4,7 +4,7 @@ import HomePhoto from '../assets/img/home.jpg';
 import Music from '../components/Music';
 import About from '../components/About';
 import Gigs from '../components/Gigs';
-import Button  from 'react-toolbox/lib/button/button.js';
+
 
 
 class Home extends React.Component {
@@ -41,7 +41,6 @@ class Home extends React.Component {
                         <hr/>
                         <h1>Gigs</h1>
                         <Gigs />
-                        <Button label="Hello World!" />
                     </div>
                     
                 </div>

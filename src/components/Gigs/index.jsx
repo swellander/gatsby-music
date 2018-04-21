@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Table } from 'react-toolbox/lib/table';
 
 const UserModel = {
     name: {type: String},
@@ -32,15 +31,7 @@ class TableTest extends React.Component {
   
     render () {
       return (
-        <Table
-          model={UserModel}
-          onChange={this.handleChange}
-          onSelect={this.handleSelect}
-          selectable
-          multiSelectable
-          selected={this.state.selected}
-          source={this.state.source}
-        />
+        <h1>YO</h1>
       );
     }
 }
