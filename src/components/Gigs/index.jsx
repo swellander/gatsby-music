@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Gig from '../Gig';
+var contentful = require('contentful');
+
+const client = contentful.createClient({
+  space: 'rdg6oe8xsim4',
+  accessToken: 'c6f3706042a90751d7013b68c312dbc1254ef039c9957e6d420c628232c0114e'
+})
 
 const UserModel = {
     name: {type: String},
@@ -11,29 +18,36 @@ const UserModel = {
     active: {type: Boolean}
   };
   
-const users = [
-    {name: 'Javi Jimenez', twitter: '@soyjavi', birthdate: new Date(1980, 3, 11), cats: 1},
-    {name: 'Javi Velasco', twitter: '@javivelasco', birthdate: new Date(1987, 1, 1), dogs: 1, active: true}
-];
-  
-class TableTest extends React.Component {
-    state = { selected: [], source: users };
-  
-    handleChange = (row, key, value) => {
-      const source = this.state.source;
-      source[row][key] = value;
-      this.setState({source});
-    };
-  
-    handleSelect = (selected) => {
-      this.setState({selected});
-    };
-  
-    render () {
-      return (
-        <h1>YO</h1>
-      );
+const gigs = {};
+
+client.getEntries()
+.then(function (entries) {
+  // log the title for all the entries that have it
+  entries.items.forEach(function (entry) {
+    console.log(entry);
+    if(entry.fields.productName) {
+      console.log(entry.fields.productName)
     }
+  })
+})
+  
+function Gigs() {
+  return (
+    <div>
+      <hr/>
+      {Object.keys(gigs).map((gigId, index) => {
+        let gig = gigs[gigId];
+        return <Gig 
+          title={gig.title}
+          location={gig.location}
+          date={gig.date}
+          time={gig.time}
+          eventLink={gig.eventLink}
+          key={index}
+        />;
+      })}
+    </div>
+  );
 }
 
-export default TableTest;
+export default Gigs;
